@@ -16,12 +16,19 @@ namespace Market.Util
     {
         private T _Result;
         private int _Length;
-        public MarketResponseType Type;
+
+        private MarketResponseType _Type;
+
+        public String Type {
+            get {
+                return _Type.ToString();
+            }
+        }
 
         public MarketHttpResponse(T result, MarketResponseType type, int length = 0)
         {
             _Result = result;
-            Type = type;
+            _Type = type;
             if (length != 0) _Length = length;
         }
 
