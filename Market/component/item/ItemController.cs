@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace Market.Component.Item
 {
@@ -22,8 +23,11 @@ namespace Market.Component.Item
         public ActionResult<IEnumerable<Item>> GetItems()
         {
             List<Item> data = itemRepository.GetAllItem().ToList();
+            var response = new MarketHttpResponse<List<Item>>(data, MarketResponseType.SUCCESS, data.Count);
 
-            return Ok(new MarketHttpResponse<List<Item>>(data, MarketResponseType.SUCCESS, data.Count));
+            if (data.Any()) return Ok(response);
+
+            return NoContent();
         }
 
         [HttpGet("{id}")]
