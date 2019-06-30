@@ -1,4 +1,4 @@
-﻿using Market.component.item;
+﻿using Market.Component.Item;
 using Microsoft.EntityFrameworkCore;
 
 namespace Market.Config

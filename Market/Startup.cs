@@ -1,5 +1,5 @@
-﻿using Market.component.item;
-using Market.component.item.Interface;
+﻿using Market.Component.Item;
+using Market.Component.Item.Interface;
 using Market.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,6 +44,8 @@ namespace Market
                     Description = "Learning Asp.Net Core"
                 });
             });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

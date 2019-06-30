@@ -1,11 +1,12 @@
-﻿using Market.component.item.Interface;
+﻿using Market.Component.Item.Interface;
 using Market.Config;
+using Market.Util;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Market.component.item
+namespace Market.Component.Item
 {
 
     public class ItemController: MarketMainController
@@ -20,13 +21,22 @@ namespace Market.component.item
         [HttpGet]
         public ActionResult<IEnumerable<Item>> GetItems()
         {
-            return itemRepository.GetAllItem().ToList();
+            List<Item> data = itemRepository.GetAllItem().ToList();
+
+            return Ok(new MarketHttpResponse<List<Item>>(data, MarketResponseType.SUCCESS, data.Count));
         }
 
         [HttpGet("{id}")]
         public ActionResult<Item> GetItemById(Guid id)
         {
-            return itemRepository.GetById(id);
+            Item data = itemRepository.GetById(id);
+            MarketHttpResponse<Item> response = new MarketHttpResponse<Item>(data, MarketResponseType.NOT_FOUND);
+
+            if (data == null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using Market.component.item.Interface;
+﻿using Market.Component.Item;
+using Market.Component.Item.Interface;
 using Market.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Market.component.item
+namespace Market.Component.Item
 {
     public class ItemRepository: IItemRepository
     {

@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Market.Util
+{
+    public enum MarketResponseType
+    {
+        SUCCESS = 1,
+        NOT_FOUND = 2
+    }
+
+    public class MarketHttpResponse <T>
+    {
+        private T _Result;
+        private int _Length;
+        public MarketResponseType Type;
+
+        public MarketHttpResponse(T result, MarketResponseType type, int length = 0)
+        {
+            _Result = result;
+            Type = type;
+            if (length != 0) _Length = length;
+        }
+
+        public dynamic Result
+        {
+            get
+            {
+                dynamic res = new ExpandoObject();
+                res.Result = _Result;
+
+                if (_Length != 0)
+                    res.Length = _Length;
+
+                return res;
+            }
+        }
+    }
+}

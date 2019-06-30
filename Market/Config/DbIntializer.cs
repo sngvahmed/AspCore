@@ -1,4 +1,4 @@
-using Market.component.item;
+using Market.Component.Item;
 using System;
 
 namespace Market.Config

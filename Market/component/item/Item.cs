@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Market.component.item
+namespace Market.Component.Item
 {
     public class Item
     {
