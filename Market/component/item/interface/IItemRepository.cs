@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Market.component.item
+namespace Market.component.item.Interface
 {
     public interface IItemRepository
     {

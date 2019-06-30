@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Market.component.item.Interface;
+using Market.Config;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Market.component.item
 {
-    
+
     public class ItemController: MarketMainController
     {
         private readonly IItemRepository itemRepository;

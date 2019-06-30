@@ -1,6 +1,10 @@
 ﻿using Market.component.item;
+using Market.component.item.Interface;
+using Market.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
@@ -8,11 +12,26 @@ namespace Market
 {
     public class Startup
     {
+        public IConfiguration configuration { get; }
+
+        public Startup (IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IItemRepository, MockItemRepository>();
+
+            services.AddDbContext<MarketDbContext>(option =>
+            {
+                option.UseSqlServer(configuration.GetConnectionString("DevLocalDbMarket"));
+            });
+
+            services.AddTransient<IItemRepository, ItemRepository>();
+
+
             services.AddMvc();
 
             services.AddSwaggerGen(c =>

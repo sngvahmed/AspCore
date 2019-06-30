@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Market
+namespace Market.Config
 {
     [Route("api/v1/market/[controller]")]
     [ApiController]
