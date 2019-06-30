@@ -9,7 +9,8 @@ namespace Market.Util
     public enum MarketResponseType
     {
         SUCCESS = 1,
-        NOT_FOUND = 2
+        NOT_FOUND = 2,
+        FOUND = 3
     }
 
     public class MarketHttpResponse <T>

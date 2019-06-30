@@ -7,5 +7,8 @@ namespace Market.Component.Item.Interface
     {
         IEnumerable<Item> GetAllItem();
         Item GetById(Guid id);
+        Item AddItem(Item item);
+
+        Item UpdateItem(Item item);
     }
 }

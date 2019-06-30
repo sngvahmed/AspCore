@@ -4,6 +4,7 @@ using Market.Util;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Net;
 
@@ -34,13 +35,52 @@ namespace Market.Component.Item
         public ActionResult<Item> GetItemById(Guid id)
         {
             Item data = itemRepository.GetById(id);
-            MarketHttpResponse<Item> response = new MarketHttpResponse<Item>(data, MarketResponseType.NOT_FOUND);
+            MarketHttpResponse<Item> response = new MarketHttpResponse<Item>(data, (data == null) ? MarketResponseType.NOT_FOUND : MarketResponseType.FOUND);
 
             if (data == null)
             {
                 return NotFound(response);
             }
             return Ok(response);
+        }
+
+        [HttpPost]
+        public ActionResult<Item> AddItem(Item item)
+        {
+            try { 
+                return Ok(itemRepository.AddItem(item));
+            }
+            catch (MarketControllerException exc)
+            {
+                return BadRequest(exc.Response);
+            }
+            catch (Exception exc)
+            {
+                string message = exc.Message;
+                if (exc.InnerException != null) message += exc.InnerException.Message;
+
+                return BadRequest(new MarketControllerException(message).Response);
+            }
+        }
+
+        [HttpPut]
+        public ActionResult<Item> UpdateItem(Item item)
+        {
+            try
+            {
+                return Ok(itemRepository.UpdateItem(item));
+            }
+            catch (MarketControllerException exc)
+            {
+                return BadRequest(exc.Response);
+            }
+            catch (Exception exc)
+            {
+                string message = exc.Message;
+                if (exc.InnerException != null) message += exc.InnerException.Message;
+
+                return BadRequest(new MarketControllerException(message).Response);
+            }
         }
     }
 }
